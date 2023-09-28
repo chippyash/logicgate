@@ -3,22 +3,16 @@
 
 package logicgate
 
-import "github.com/kelindar/bitmap"
+import (
+	"github.com/kelindar/bitmap"
+)
 
 // Nand is the NAND gate
 // see https://en.wikipedia.org/wiki/NAND_gate
 func Nand(a, b bitmap.Bitmap) bitmap.Bitmap {
-	var a1, a2 bitmap.Bitmap
+	var a1 bitmap.Bitmap
 	a.Clone(&a1)
 	a1.And(b)
-	a2 = Not(a1)
 
-	//reduce response to max number of bits in the input
-	l := a.Count()
-	lB := b.Count()
-	if lB > l {
-		l = lB
-	}
-
-	return a2
+	return Not(a1)
 }

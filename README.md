@@ -2,6 +2,7 @@
 <img src="https://img.shields.io/github/go-mod/go-version/chippyash/logicgate" alt="Go Version">
 <a href="https://pkg.go.dev/github.com/chippyash/logicgate"><img src="https://pkg.go.dev/badge/github.com/chippyash/logicgate" alt="PkgGoDev"></a>
 <a href="https://goreportcard.com/report/github.com/chippyash/logicgate"><img src="https://goreportcard.com/badge/github.com/chippyash/logicgate" alt="Go Report Card"></a>
+<a href="https://coveralls.io/github/chippyash/logicgate?branch=master"><img src="https://coveralls.io/repos/github/chippyash/logicgate/badge.svg?branch=master" alt="Coverage Status"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
 </p>
 
@@ -60,7 +61,7 @@ hadn't gotten the same players playing together too often.  That's where I hit a
 In a sense, this library is a response to that, and in particular the Xnor and associated Compare function. But once down 
 the rabbit hole, off we must go!
 
-`examples/full_adder.go` is a purely contrived attempt to produce a bitmap oriented electronic circuit as described in
+`examples/full_adder/main.go` is a purely contrived attempt to produce a bitmap oriented electronic circuit as described in
 https://en.wikipedia.org/wiki/Adder_(electronics)  It has no functional reason to exist, as there are far better ways to do
 these things. It exists only as a demonstration of the art of the possible.
 

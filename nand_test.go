@@ -1,3 +1,6 @@
+//go:build unit
+// +build unit
+
 // Copyright (c) Ashley Kitson, 2023. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for details.
 
@@ -16,6 +19,7 @@ func TestNand_Zero_Zero_Is_One(t *testing.T) {
 	b.Grow(64)
 	res := logicgate.Nand(a, b)
 	assert.True(t, res.Contains(1))
+	assert.Equal(t, len(a), len(res))
 }
 
 func TestNand_Zero_One_Is_One(t *testing.T) {
@@ -25,6 +29,7 @@ func TestNand_Zero_One_Is_One(t *testing.T) {
 	b.Ones()
 	res := logicgate.Nand(a, b)
 	assert.True(t, res.Contains(1))
+	assert.Equal(t, len(a), len(res))
 }
 
 func TestNand_One_Zero_Is_One(t *testing.T) {
@@ -34,6 +39,7 @@ func TestNand_One_Zero_Is_One(t *testing.T) {
 	a.Ones()
 	res := logicgate.Nand(a, b)
 	assert.True(t, res.Contains(1))
+	assert.Equal(t, len(a), len(res))
 }
 
 func TestNand_One_One_Is_Zero(t *testing.T) {
@@ -44,4 +50,5 @@ func TestNand_One_One_Is_Zero(t *testing.T) {
 	b.Ones()
 	res := logicgate.Nand(a, b)
 	assert.False(t, res.Contains(1))
+	assert.Equal(t, len(a), len(res))
 }

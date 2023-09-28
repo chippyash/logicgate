@@ -1,5 +1,8 @@
-// Copyright (c) Ashley Kitson, 2023. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for details.
+/*
+ * Copyright (c) Ashley Kitson, 2023. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for details.
+ *
+ */
 
 package main
 
@@ -39,7 +42,7 @@ func Add(a, b bitmap.Bitmap) bitmap.Bitmap {
 	var sum bitmap.Bitmap
 	//set new sum (s) and carry to false for initialisation
 	var s, carry bool
-	//make the sum is a bitmap the same length as the largest incoming bitmap
+	//make the sum a bitmap the same length as the largest incoming bitmap
 	l := len(a)
 	if len(b) > l {
 		l = len(b)

@@ -1,3 +1,6 @@
+//go:build unit
+// +build unit
+
 /*
  * Copyright (c) Ashley Kitson, 2023. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project root for details.

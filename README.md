@@ -1,4 +1,7 @@
+<p align="center">  </p>
 <p align="center">
+<img src="logic-gate.png" alt="Logic Gates">
+<br>
 <img src="https://img.shields.io/github/go-mod/go-version/chippyash/logicgate" alt="Go Version">
 <a href="https://pkg.go.dev/github.com/chippyash/logicgate"><img src="https://pkg.go.dev/badge/github.com/chippyash/logicgate" alt="PkgGoDev"></a>
 <a href="https://goreportcard.com/report/github.com/chippyash/logicgate"><img src="https://goreportcard.com/badge/github.com/chippyash/logicgate" alt="Go Report Card"></a>

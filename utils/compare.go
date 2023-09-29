@@ -7,56 +7,51 @@
 package utils
 
 import (
-	"errors"
-	"github.com/chippyash/logicgate"
 	"github.com/kelindar/bitmap"
 )
 
-var ErrIncomparableBitmaps = errors.New("incomparable bitmaps")
-
-func Compare(a, b bitmap.Bitmap) (int, error) {
+// Compare compares two bitmaps (a, b) and returns 0 if they are numerically equal, 1 if a is greater than b and -1 if a is less than b.
+// Comparison is left to right, i.e. MSB to LSB.
+func Compare(a, b bitmap.Bitmap) int {
 	//nil bitmaps
 	if a == nil && b == nil {
-		return 0, nil
+		return 0
 	}
-	if a == nil || b == nil {
-		return 0, ErrIncomparableBitmaps
+	if a == nil && b != nil {
+		return -1
 	}
-	//empty bitmaps
-	// empty bitmaps are bitmaps that contain no 1s or have no length
+	if a != nil && b == nil {
+		return 1
+	}
+	//empty bitmaps that contain no 1s
 	if a.Count() == 0 && b.Count() == 0 {
-		return 0, nil
+		return 0
 	}
-
-	//equality
-	res := logicgate.Xnor(a, b)
-	if res.Contains(1) {
-		return 0, nil
+	//empty bitmaps that contain no length
+	if len(a) == 0 && len(b) == 0 {
+		return 0
+	}
+	//one empty bitmap
+	if len(b) == 0 && len(a) != 0 && a.Count() > 1 {
+		return 1
+	}
+	if len(a) == 0 && len(b) != 0 && b.Count() > 1 {
+		return -1
 	}
 
 	//inequality
-	mA, okA := a.Max()
-	mB, okB := b.Max()
-	if okA && !okB {
-		//b is empty
-		return 1, nil
+	l := len(a)
+	if len(b) > l {
+		l = len(b)
 	}
-	if !okA && okB {
-		//a is empty
-		return -1, nil
+	for i := uint32(l * 64); i > 0; i-- {
+		if a.Contains(i-1) && !b.Contains(i-1) {
+			return 1
+		}
+		if !a.Contains(i-1) && b.Contains(i-1) {
+			return -1
+		}
 	}
-
-	if mA == mB {
-		var aa, bb bitmap.Bitmap
-		a.Clone(&aa)
-		b.Clone(&bb)
-		aa.Remove(mA)
-		bb.Remove(mA)
-		return Compare(aa, bb)
-	}
-	if mA > mB {
-		return 1, nil
-	}
-
-	return -1, nil
+	//equality
+	return 0
 }

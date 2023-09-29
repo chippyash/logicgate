@@ -23,12 +23,12 @@ func Compare(a, b bitmap.Bitmap) int {
 	if a != nil && b == nil {
 		return 1
 	}
-	//empty bitmaps that contain no 1s
-	if a.Count() == 0 && b.Count() == 0 {
-		return 0
-	}
 	//empty bitmaps that contain no length
 	if len(a) == 0 && len(b) == 0 {
+		return 0
+	}
+	//empty bitmaps that contain no 1s
+	if a.Count() == 0 && b.Count() == 0 {
 		return 0
 	}
 	//one empty bitmap

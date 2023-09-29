@@ -163,13 +163,13 @@ func ExCompare() {
 	a = bitmap.Bitmap{0x00}
 	b = bitmap.Bitmap{0xff}
 	fmt.Printf("a=%08b, b=%08b\n", a[0], b[0])
-	r, _ := utils.Compare(a, a)
+	r := utils.Compare(a, a)
 	fmt.Printf("Compare(%08b, %08b) => %d\n", a[0], a[0], r)
-	r, _ = utils.Compare(a, b)
+	r = utils.Compare(a, b)
 	fmt.Printf("Compare(%08b, %08b) => %d\n", a[0], b[0], r)
-	r, _ = utils.Compare(b, a)
+	r = utils.Compare(b, a)
 	fmt.Printf("Compare(%08b, %08b) => %d\n", b[0], a[0], r)
-	r, _ = utils.Compare(b, b)
+	r = utils.Compare(b, b)
 	fmt.Printf("Compare(%08b, %08b) => %d\n", b[0], b[0], r)
 }
 

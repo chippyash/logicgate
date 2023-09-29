@@ -19,6 +19,17 @@ func TestCompare_Two_Nil_Bitmaps_Are_Equal(t *testing.T) {
 	assert.Equal(t, 0, res, "a: %016b b: %016b", a, b)
 }
 
+func TestCompare_One_Nil_Bitmaps_Are_Unequal(t *testing.T) {
+	a := bitmap.Bitmap{}
+	var b bitmap.Bitmap
+	res := utils.Compare(a, b)
+	assert.Equal(t, 1, res, "a: %016b b: %016b", a, b)
+
+	res = utils.Compare(b, a)
+	assert.Equal(t, -1, res, "a: %016b b: %016b", a, b)
+
+}
+
 func TestCompare_Two_Empty_Bitmaps_Are_Equal(t *testing.T) {
 	//two empty bitmaps
 	a, b := bitmap.Bitmap{}, bitmap.Bitmap{}
@@ -27,6 +38,11 @@ func TestCompare_Two_Empty_Bitmaps_Are_Equal(t *testing.T) {
 
 	//one empty bitmap, one bitmap == 0
 	a.Grow(16)
+	res = utils.Compare(a, b)
+	assert.Equal(t, 0, res, "a: %016b b: %016b", a, b)
+
+	//two bitmaps with no bits set
+	b.Grow(16)
 	res = utils.Compare(a, b)
 	assert.Equal(t, 0, res, "a: %016b b: %016b", a, b)
 }
@@ -75,6 +91,22 @@ func TestCompare_B_Is_Bigger_Than_A_MultiBits(t *testing.T) {
 
 	res := utils.Compare(a, b)
 	assert.Equal(t, -1, res, "a: %016b b: %016b", a, b)
+}
+
+func TestCompare_One_Empty_And_One_NonEmpty_Bitmap_Are_Not_Equal(t *testing.T) {
+	a, b := bitmap.Bitmap{}, bitmap.Bitmap{0x01}
+	res := utils.Compare(a, b)
+	assert.Equal(t, -1, res, "a: %016b b: %016b", a, b)
+	res = utils.Compare(b, a)
+	assert.Equal(t, 1, res, "a: %016b b: %016b", b, a)
+}
+
+func TestCompare_Will_Work_With_Unequal_Length_Bitmaps(t *testing.T) {
+	a, b := bitmap.Bitmap{0x44, 0xFF}, bitmap.Bitmap{0x44}
+	res := utils.Compare(a, b)
+	assert.Equal(t, 1, res, "a: %064b b: %064b", a, b)
+	res = utils.Compare(b, a)
+	assert.Equal(t, -1, res, "a: %064b b: %064b", b, a)
 }
 
 func FuzzCompare(f *testing.F) {

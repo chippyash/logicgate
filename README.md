@@ -51,15 +51,14 @@ The `bit` that was missing was the ability to compare bitmaps.
 
 ### Utility functions
 
- - func Compare(a, b bitmap.Bitmap) (int, error)
+ - func Compare(a, b bitmap.Bitmap) int
  - func RangeAll(src bitmap.Bitmap, fn func(k uint32, v bool))
  - func Trim(a bitmap.Bitmap, bitLen uint32) bitmap.Bitmap
 
 ### An example of what you can do
 My first use for Bitmap was to categorise team games by the players in the team, the objective being to ensure that I 
 hadn't gotten the same players playing together too often.  That's where I hit a roadblock with Bitmap, it had no comparator.
-In a sense, this library is a response to that, and in particular the Xnor and associated Compare function. But once down 
-the rabbit hole, off we must go!
+In a sense, this library is a response to that. But once down the rabbit hole, off we must go!
 
 `examples/full_adder/main.go` is a purely contrived attempt to produce a bitmap oriented electronic circuit as described in
 https://en.wikipedia.org/wiki/Adder_(electronics)  It has no functional reason to exist, as there are far better ways to do
